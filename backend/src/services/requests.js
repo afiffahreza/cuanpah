@@ -68,7 +68,9 @@ const getAllRequests = (req, res) => {
         connection.query(sql, (err, results) => {
             res.status(200).send({ status: 'OK', data: results });
         });
-    } catch (error) {}
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 module.exports = { createNewRequest, getAllRequests };
