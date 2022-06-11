@@ -11,12 +11,14 @@ const createNewRequest = (req, res) => {
         !body.driverId ||
         !body.lat ||
         !body.lon ||
-        !body.status
+        !body.status ||
+        !body.wasteWeight ||
+        !body.wasteType
     ) {
         res.status(400).send({
             status: 'FAILED',
             data: {
-                error: "One of the following keys is missing or is empty in request body: 'userId', 'driverId', 'lat', 'lon', 'status'",
+                error: "One of the following keys is missing or is empty in request body: 'userId', 'driverId', 'lat', 'lon', 'status', 'wasteWeight', 'wasteType'",
             },
         });
         return;
@@ -39,10 +41,12 @@ const createNewRequest = (req, res) => {
         status: body.status,
         request_time: request_time,
         pickup_time: pickup_time,
+        wasteWeight: body.wasteWeight,
+        wasteType: body.wasteType,
     };
 
-    let sql = `INSERT INTO cuanpah.requests (userId, driverId, lat, lon, status, requestTime, pickupTime)
-     VALUES (\'${newRequest.userId}\', \'${newRequest.driverId}\', \'${newRequest.lat}\', \'${newRequest.lon}\', \'${newRequest.status}\', \'${newRequest.request_time}\', \'${newRequest.pickup_time}\')`;
+    let sql = `INSERT INTO cuanpah.requests (userId, driverId, lat, lon, status, requestTime, pickupTime, wasteWeight, wasteType)
+     VALUES (\'${newRequest.userId}\', \'${newRequest.driverId}\', \'${newRequest.lat}\', \'${newRequest.lon}\', \'${newRequest.status}\', \'${newRequest.request_time}\', \'${newRequest.pickup_time}\', \'${newRequest.wasteWeight}\', \'${newRequest.wasteType}\')`;
 
     connection.query(sql, (err) => {
         if (err) throw err;
