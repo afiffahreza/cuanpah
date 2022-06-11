@@ -16,12 +16,12 @@ module.exports = function (app) {
   app.get("/requests", request.getAllRequests);
 
   app.post("/userpoints", userPoints.createUserPoint);
-  app.get("/userpoints", userPoints.getUserPoint);
+  app.get("/userpoints/:userId", userPoints.getUserPoint);
   app.delete("/userpoints", userPoints.deleteUserPoint);
   app.put("/userpoints", userPoints.updateUserPoint);
 
   app.post("/uservouchers", userVouchers.createUserVoucher);
-  app.get("/uservouchers", userVouchers.getUserVoucher);
+  app.get("/uservouchers/:userId", userVouchers.getUserVoucher);
   app.put("/uservouchers", userVouchers.updateUserVoucher);
   app.delete("/uservouchers", userVouchers.deleteUserVoucher);
 

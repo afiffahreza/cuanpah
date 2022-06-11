@@ -22,7 +22,7 @@ const createUserPoint = async (req, res) => {
 
 const getUserPoint = async (req, res) => {
   try {
-    const { userId } = req.body;
+    const { userId } = req.params;
     const sql = `SELECT * FROM user_points WHERE userId = '${userId}'`;
     connection.query(sql, function (err, result) {
       if (err) throw err;

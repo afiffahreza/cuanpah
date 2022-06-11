@@ -22,7 +22,7 @@ const createUserVoucher = async (req, res) => {
 
 const getUserVoucher = async (req, res) => {
   try {
-    const { userId } = req.body;
+    const { userId } = req.params;
     const sql = `SELECT * FROM user_vouchers WHERE userId = '${userId}'`;
     connection.query(sql, function (err, result) {
       if (err) throw err;
