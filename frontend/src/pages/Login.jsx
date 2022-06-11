@@ -13,24 +13,6 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
 const theme = createTheme();
 
 export default function Login({ user, setUser, test }) {
@@ -38,8 +20,8 @@ export default function Login({ user, setUser, test }) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+      driverId: data.get("driverId"),
+      plate: data.get("plate"),
     });
   };
 
@@ -55,9 +37,7 @@ export default function Login({ user, setUser, test }) {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "#B6DB61" }}>
-            <LockOutlinedIcon />
-          </Avatar>
+          <img src="../assets/logo.png" style={{ maxWidth: "200px" }} />
           <Typography component="h1" variant="h5">
             Cuanpah Driver Login
           </Typography>
@@ -71,27 +51,31 @@ export default function Login({ user, setUser, test }) {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="driverId"
+              label="Driver ID"
+              name="driverId"
+              autoComplete="driverId"
               autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
+              name="plate"
+              label="Plate"
+              id="plate"
+              autoComplete="plate"
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{
+                mt: 3,
+                mb: 2,
+                bgcolor: "#B6DB61",
+                ":hover": { bgcolor: "#FFDB61" },
+              }}
             >
               Sign In
             </Button>
