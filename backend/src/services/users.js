@@ -91,6 +91,7 @@ exports.login = async (req, res) => {
             // save user token
             const response = {
               message: "User Logged In Successfully",
+              id: user.id,
               email,
               name: user.name,
               token,
