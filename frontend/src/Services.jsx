@@ -4,17 +4,11 @@ class Services {
   login(id) {
     return http.get(`/drivers/${id}`);
   }
-  signup(data) {
-    return http.post("/signup", data);
+  getRequestsByDriver(id) {
+    return http.get(`/requests/${id}`);
   }
-  getByUsername(username) {
-    return http.get(`/user/${username}`);
-  }
-  updatePlate(username, data) {
-    return http.put(`/plates/${username}`, data);
-  }
-  updateMoney(username, data) {
-    return http.put(`/money/${username}`, data);
+  updateStatus(data) {
+    return http.put("/requests", data);
   }
 }
 

@@ -14,23 +14,24 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Alert from "@mui/material/Alert";
 import Services from "../Services";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
-export default function Login({ user, setUser, test }) {
+export default function Login({ user, setUser }) {
   const [wrongUser, setWrongUser] = React.useState(false);
+  let navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     Services.login(data.get("driverId")).then((res) => {
-      console.log(res);
       if (res.data.data.length === 0) {
         setWrongUser(true);
       } else {
         if (res.data.data[0].plate === data.get("plate")) {
           setUser(res.data.data[0]);
-          console.log(user);
+          navigate("../dashboard");
         } else {
           setWrongUser(true);
         }
