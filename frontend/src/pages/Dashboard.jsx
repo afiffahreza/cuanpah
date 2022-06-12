@@ -8,6 +8,8 @@ import { Button } from "@mui/material";
 
 const Dashboard = ({ user, setUser }) => {
   const [requests, setRequests] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [driver, setDriver] = useState(null);
 
   const updateStatus = (id, status) => {
     Services.updateStatus({ requestId: id, status }).then((res) => {
@@ -17,9 +19,12 @@ const Dashboard = ({ user, setUser }) => {
   };
 
   useEffect(() => {
-    Services.getRequestsByDriver(user.id).then((res) => {
+    const cuanpahDriver = JSON.parse(sessionStorage.getItem("cuanpahDriver"));
+    setDriver(cuanpahDriver);
+    Services.getRequestsByDriver(cuanpahDriver.id).then((res) => {
       setRequests(res.data.data);
       console.log(res.data.data);
+      setLoading(false);
     });
   }, []);
 
@@ -36,81 +41,93 @@ const Dashboard = ({ user, setUser }) => {
           }}
         >
           <img src="../assets/logo.png" style={{ maxWidth: "200px" }} />
-          <Typography component="h1" variant="h5">
-            Welcome {user.name}!
-          </Typography>
-          <Typography component="h1" variant="h5" marginY={1}>
-            Pick Up Requests Dashboard
-          </Typography>
-          {requests.map((request) => (
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                margin: 1,
-                border: "1px solid black",
-                padding: 1,
-                width: "500px",
-              }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "left",
-                  justifyContent: "center",
-                  margin: 1,
-                  width: "300px",
-                }}
-              >
-                <Typography variant="h6">
-                  Request ID: {request.requestId}
-                </Typography>
-                <Typography>
-                  Location: {request.lat.toString().slice(0, 5)}{" "}
-                  {request.lon.toString().slice(0, 5)}
-                </Typography>
-                <Typography>
-                  Waste: {request.wasteType} {request.wasteWeight}kg
-                </Typography>
-                <Typography>Status: {request.status}</Typography>
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  verticalAlign: "top",
-                  margin: 1,
-                  width: "200px",
-                }}
-              >
-                {request.status === "pending" ||
-                requests.status === "Ongoing" ||
-                requests.status === "ongoing" ? (
-                  <>
-                    <Typography>Change Status</Typography>
-                    <Button
-                      variant="contained"
-                      style={{ backgroundColor: "#B6DB61", color: "white" }}
-                      onClick={() =>
-                        updateStatus(request.requestId, "completed")
-                      }
-                    >
-                      Completed
-                    </Button>
-                  </>
-                ) : (
-                  <>
-                    <Typography>Completed at</Typography>
-                    <Typography>{request.pickupTime.split("T")[0]}</Typography>
-                    <Typography>{request.pickupTime.split("T")[1]}</Typography>
-                  </>
-                )}
-              </Box>
-            </Box>
-          ))}
+          {loading ? (
+            <Typography component="h1" variant="h5">
+              Loading...
+            </Typography>
+          ) : (
+            <>
+              <Typography component="h1" variant="h5">
+                Welcome {driver.name}!
+              </Typography>
+              <Typography component="h1" variant="h5" marginY={1}>
+                Pick Up Requests Dashboard
+              </Typography>
+              {requests.map((request) => (
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    margin: 1,
+                    border: "1px solid black",
+                    padding: 1,
+                    width: "500px",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "left",
+                      justifyContent: "center",
+                      margin: 1,
+                      width: "300px",
+                    }}
+                  >
+                    <Typography variant="h6">
+                      Request ID: {request.requestId}
+                    </Typography>
+                    <Typography>
+                      Location: {request.lat.toString().slice(0, 5)}{" "}
+                      {request.lon.toString().slice(0, 5)}
+                    </Typography>
+                    <Typography>
+                      Waste: {request.wasteType} {request.wasteWeight}kg
+                    </Typography>
+                    <Typography>Status: {request.status}</Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      verticalAlign: "top",
+                      margin: 1,
+                      width: "200px",
+                    }}
+                  >
+                    {request.status === "pending" ||
+                    requests.status === "Ongoing" ||
+                    requests.status === "ongoing" ? (
+                      <>
+                        <Typography>Change Status</Typography>
+                        <Button
+                          variant="contained"
+                          style={{ backgroundColor: "#B6DB61", color: "white" }}
+                          onClick={() =>
+                            updateStatus(request.requestId, "completed")
+                          }
+                        >
+                          Completed
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <Typography>Completed at</Typography>
+                        <Typography>
+                          {request.pickupTime.split("T")[0]}
+                        </Typography>
+                        <Typography>
+                          {request.pickupTime.split("T")[1]}
+                        </Typography>
+                      </>
+                    )}
+                  </Box>
+                </Box>
+              ))}
+            </>
+          )}
         </Box>
       </Container>
     </>

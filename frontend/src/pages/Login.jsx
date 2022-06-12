@@ -31,6 +31,10 @@ export default function Login({ user, setUser }) {
       } else {
         if (res.data.data[0].plate === data.get("plate")) {
           setUser(res.data.data[0]);
+          sessionStorage.setItem(
+            "cuanpahDriver",
+            JSON.stringify(res.data.data[0])
+          );
           navigate("../dashboard");
         } else {
           setWrongUser(true);
