@@ -12,16 +12,29 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Alert from "@mui/material/Alert";
+import Services from "../Services";
 
 const theme = createTheme();
 
 export default function Login({ user, setUser, test }) {
+  const [wrongUser, setWrongUser] = React.useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      driverId: data.get("driverId"),
-      plate: data.get("plate"),
+    Services.login(data.get("driverId")).then((res) => {
+      console.log(res);
+      if (res.data.data.length === 0) {
+        setWrongUser(true);
+      } else {
+        if (res.data.data[0].plate === data.get("plate")) {
+          setUser(res.data.data[0]);
+          console.log(user);
+        } else {
+          setWrongUser(true);
+        }
+      }
     });
   };
 
@@ -80,6 +93,16 @@ export default function Login({ user, setUser, test }) {
               Sign In
             </Button>
           </Box>
+          {wrongUser && (
+            <Alert
+              onClose={() => {
+                setWrongUser(false);
+              }}
+              severity="error"
+            >
+              Wrong Driver ID or Plate
+            </Alert>
+          )}
         </Box>
       </Container>
     </ThemeProvider>

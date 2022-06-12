@@ -1,8 +1,8 @@
-import http from "Connection";
+import http from "./Connection";
 
 class Services {
-  login(data) {
-    return http.post("/login", data);
+  login(id) {
+    return http.get(`/drivers/${id}`);
   }
   signup(data) {
     return http.post("/signup", data);
