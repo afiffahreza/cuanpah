@@ -14,6 +14,8 @@ module.exports = function (app) {
 
   app.post("/requests", request.createNewRequest);
   app.get("/requests", request.getAllRequests);
+  app.get("/requests/:driverId", request.getRequestbyDriver);
+  app.put("/requests", request.updateRequestStatus);
 
   app.post("/userpoints", userPoints.createUserPoint);
   app.get("/userpoints/:userId", userPoints.getUserPoint);
