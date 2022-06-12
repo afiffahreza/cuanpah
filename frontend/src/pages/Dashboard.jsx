@@ -11,11 +11,15 @@ const Dashboard = ({ user, setUser }) => {
   const [loading, setLoading] = useState(true);
   const [driver, setDriver] = useState(null);
 
-  const updateStatus = (id, status) => {
+  const updateStatus = (id, status, userId) => {
     Services.updateStatus({ requestId: id, status }).then((res) => {
       console.log(res);
     });
-    location.reload();
+    Services.getPoints(userId).then((res) => {
+      let initialPoint = res.data.data[0].points;
+      Services.updatePoints({ userId, points: initialPoint + 100 });
+    });
+    setTimeout(() => location.reload(), 2000);
   };
 
   const getMapsLink = (lat, lng) => {
@@ -63,8 +67,10 @@ const Dashboard = ({ user, setUser }) => {
                     display: "flex",
                     flexDirection: "row",
                     alignItems: "center",
-                    margin: 1,
+                    margin: 2,
                     border: "1px solid black",
+                    borderRadius: "15px",
+                    boxShadow: "0px 2px 5px #B6DB61",
                     padding: 1,
                     width: "500px",
                   }}
@@ -105,15 +111,19 @@ const Dashboard = ({ user, setUser }) => {
                     }}
                   >
                     {request.status === "pending" ||
-                    requests.status === "Ongoing" ||
-                    requests.status === "ongoing" ? (
+                    request.status === "Ongoing" ||
+                    request.status === "ongoing" ? (
                       <>
                         <Typography>Change Status</Typography>
                         <Button
                           variant="contained"
                           style={{ backgroundColor: "#B6DB61", color: "white" }}
                           onClick={() =>
-                            updateStatus(request.requestId, "completed")
+                            updateStatus(
+                              request.requestId,
+                              "completed",
+                              request.userId
+                            )
                           }
                         >
                           Completed
