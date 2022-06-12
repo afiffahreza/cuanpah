@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Services from "../Services";
-import { Button } from "@mui/material";
+import { Button, Link } from "@mui/material";
 
 const Dashboard = ({ user, setUser }) => {
   const [requests, setRequests] = useState([]);
@@ -16,6 +16,10 @@ const Dashboard = ({ user, setUser }) => {
       console.log(res);
     });
     location.reload();
+  };
+
+  const getMapsLink = (lat, lng) => {
+    return `http://www.google.com/maps/place/${lat},${lng}`;
   };
 
   useEffect(() => {
@@ -79,7 +83,10 @@ const Dashboard = ({ user, setUser }) => {
                       Request ID: {request.requestId}
                     </Typography>
                     <Typography>
-                      Location: {request.lat.toString().slice(0, 5)}{" "}
+                      <Link href={getMapsLink(request.lat, request.lon)}>
+                        Location:
+                      </Link>{" "}
+                      {request.lat.toString().slice(0, 5)}{" "}
                       {request.lon.toString().slice(0, 5)}
                     </Typography>
                     <Typography>
