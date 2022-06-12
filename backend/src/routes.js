@@ -32,6 +32,7 @@ module.exports = function (app) {
   app.get("/allVouchers", voucher.getAllVouchers);
 
   app.post("/drivers", driver.addDriver);
+  app.get("/drivers/:id", driver.getDriverbyId);
 
   app.get("/welcome", auth, (req, res) => {
     res.status(200).send("Welcome 🙌");
