@@ -21,7 +21,9 @@ Based on data from the Ministry of Environment and Forestry, 60% of waste is tra
 We want to use our knowledge in technology to solve this problem by making Cuanpah, an application where users can take pictures of garbage/waste to sort and filter them, then the filtered and sorted waste will be picked up by a recycling company courier. Users will also earn points that can be traded with goods by using the application.  
 
 ## Repository Folders
+- APK: apk file to run on android
 - Machine Learning Model: Notebook used for training the model
 - backend: Backend API source code
 - frontend: Frontend Website source code
 - image_classification: TFLite Android Test
+- mobile: Android Mobile source code
