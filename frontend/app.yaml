@@ -1,10 +1,22 @@
 runtime: nodejs16
+manual_scaling:
+  instances: 1
+resources:
+  cpu: 1
+  memory_gb: 0.5
+  disk_size_gb: 10
 handlers:
   # Serve all static files with url ending with a file extension
+  # - url: /(.*\.(gif|png|jpg|less|json|woff|woff2|ttf|eot|scss|css|js|ico|svg)(|\.map))$
+  #   static_files: dist/\1
+  #   upload: dist/(.*)(|\.map)
+  # Catch all handler to index.html
+  # - url: /(.*)
+  #   static_files: dist/index.html
+  #   upload: dist/index.html
   - url: /(.*\..+)$
     static_files: dist/\1
     upload: dist/(.*\..+)$
-  # Catch all handler to index.html
   - url: /.*
     static_files: dist/index.html
     upload: dist/index.html

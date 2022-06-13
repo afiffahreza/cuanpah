@@ -48,7 +48,10 @@ const Dashboard = ({ user, setUser }) => {
             alignItems: "center",
           }}
         >
-          <img src="../assets/logo.png" style={{ maxWidth: "200px" }} />
+          <img
+            src="https://res.cloudinary.com/cloudinary-afif/image/upload/v1655084379/Logo_sbcnyb.png"
+            style={{ maxWidth: "200px" }}
+          />
           {loading ? (
             <Typography component="h1" variant="h5">
               Loading...
