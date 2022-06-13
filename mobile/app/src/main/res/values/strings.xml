@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Cuanpah</string>
+    <string name="masuk_ke_akun">Masuk ke Akun</string>
+    <string name="sudah_memiliki_akun">Sudah Memiliki Akun?</string>
+    <string name="buat_akun">Buat Akun</string>
+    <string name="ketentuan_yang_berlaku">ketentuan yang berlaku.</string>
+    <string name="saya_telah_membaca_dan_menyetujui">Saya telah membaca dan menyetujui</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="icon_cuanpah">Icon Cuanpah</string>
+    <string name="masuk">Masuk</string>
+    <string name="belum_memiliki_akun">Belum memiliki akun?</string>
+    <string name="splash_description">Mari bergabung dengan Daur Uang untuk menciptakan lingkungan yang lebih baik</string>
+    <string name="selamat_datang">Selamat Datang!</string>
+    <string name="logo">Logo</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_point">Point</string>
+    <string name="title_profile">Profile</string>
+    <string name="panggil_kurir">Panggil Kurir</string>
+    <string name="pindai_sampah">Pindai Sampah</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="request_permission">This sample needs camera and storage permission.</string>
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
+    <string name="intro_message">
+        <![CDATA[
+
+
+            This sample demonstrates the basic use of Camera2 API. Check the source code to see how
+            you can display camera preview and take pictures.
+
+
+        ]]>
+    </string>
+    <string name="logout">Logout</string>
+    <string name="your_point">Your Point</string>
+    <string name="_0">0</string>
+    <string name="see_all_vouchers">See All Vouchers!</string>
+    <string-array name="trash_array">
+        <item>Pilih Jenis Sampah</item>
+        <item>Glass</item>
+        <item>Cardboard</item>
+        <item>Paper</item>
+        <item>Metal</item>
+        <item>Plastic</item>
+        <item>Trash</item>
+    </string-array>
+</resources>
